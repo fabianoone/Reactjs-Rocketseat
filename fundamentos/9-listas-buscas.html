@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rocketseat - Reacj.js - Fundamentos</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        function ListNames() {
+            const [names] = React.useState([
+                'Ana',
+                'Bruno',
+                'Carlos',
+                'Edson',
+                'Fabiano',
+                'Daniel',
+                'Francisco',
+                'Rose',
+                'João'
+            ]);
+
+            const [search, setSearch] = React.useState('');
+
+            return (
+                <div>
+                    <input
+                        type="text"
+                        name="names"
+                        placeholder="Buscar por nome..."
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                    />
+                    <ul className="list-none flex flex-col h-8 w-full px-4">
+                        {names
+                            .filter((name) =>
+                                name.toLowerCase().includes(search.toLowerCase())
+                            )
+                            .map((name, index) =>
+                            <li
+                                key={`${index}-${name}`}
+                                className="text-center cursor-pointer"
+                            >
+                                <a className="p-2 h-6 flex" href={index}>{name}</a>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <main>
+                    <ListNames / >
+                </main>
+            );
+        }
+
+         ReactDOM.createRoot(document.getElementById('root')).render( < App / > );
+    </script>
+
+</body>
+
+</html>
